@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GlowCart — Skin & Hair Care Store</title>
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Theme color -->
+  <meta name="theme-color" content="#fff"/>
+
+  <!-- small critical style to reduce flash -->
+  <style>body{margin:0;background:#fcfbfd;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">
+        <a href="#" id="logo">GlowCart</a>
+        <span class="tag">Skin & Hair Care</span>
+      </div>
+
+      <nav class="nav">
+        <a href="#" data-route="home" class="nav-link active">Home</a>
+        <a href="#" data-route="products" class="nav-link">Products</a>
+        <a href="#" data-route="cart" class="nav-link">Cart <span id="cartCount" class="cart-badge">0</span></a>
+      </nav>
+
+      <div class="header-actions">
+        <input id="globalSearch" type="search" placeholder="Search products, serums, shampoos..." aria-label="Search products">
+        <button id="openFilters" class="btn-outline">Filters</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app" class="container main-area">
+    <!-- HOME -->
+    <section id="page-home" class="page">
+      <section class="hero card">
+        <div class="hero-left">
+          <h1>Glow smarter, shine brighter - your skin & hair care starts here. </h1>
+          <p class="muted">From serums to shampoos, we've got every drop of care your skin & hair deserve.</p>
+          <div class="hero-ctas">
+            <button id="shopNow" class="btn">Shop Products</button>
+            <a href="#products" class="muted link">Browse all →</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <!-- hero illustration placeholder -->
+          <div class="hero-slider">
+      <div class="slides">
+        <div class="slide active"><img src="3.jpg" alt="Skin Care Glow"></div>
+        <div class="slide"><img src="2.jpg" alt="Hair Care Shine"></div>
+        <div class="slide"><img src="4.jpg" alt="Natural Beauty"></div>
+        <div class="slide"><img src="6.jpg" alt="Fresh & Clean"></div>
+        <div class="slide"><img src="5.jpg" alt="Glow Everyday"></div>
+      </div>
+
+      <!-- Nav buttons -->
+      <button class="nav prev">&#10094;</button>
+      <button class="nav next">&#10095;</button>
+
+      <!-- Dots -->
+      <div class="dots"></div>
+    </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="feature card">
+          <h3>Find your perfect match</h3>
+          <p class="muted">filter by brand,budget or beauty needs in every seconds.</p>
+        </div>
+        <div class="feature card">
+          <h3>Beauty delivered at lightning speed</h3>
+          <p class="muted">Easy,smooth and stress-free shopping.</p>
+        </div>
+        <div class="feature card">
+          <h3>Glow for everyone</h3>
+          <p class="muted">Easy to browse,easy to love.</p>
+        </div>
+      </section>
+
+      <section class="spotlight card">
+        <h2>Trending serums & shampoos</h2>
+        <div id="spotlightRow" class="product-row"></div>
+      </section>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="page-products" class="page hidden">
+      <div class="products-grid-layout">
+        <!-- LEFT: filters -->
+        <aside class="filters card" id="filtersPanel" aria-label="Filters">
+          <h3>Filters</h3>
+
+          <label class="label">Brand</label>
+          <select id="filterBrand" aria-label="Filter by brand">
+            <option value="all">All brands</option>
+          </select>
+
+          <label class="label">Product type</label>
+          <select id="filterType" aria-label="Filter by product type">
+            <option value="all">All types</option>
+          </select>
+
+          <label class="label">Sort</label>
+          <select id="sortBy" aria-label="Sort products">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+            <option value="name">Name: A → Z</option>
+          </select>
+
+          <label class="label">Max price: <span id="priceLabel">₹2000</span></label>
+          <input type="range" id="priceRange" min="0" max="5000" step="10" value="5000" aria-label="Maximum price">
+
+          <button id="clearFilters" class="btn-outline">Clear</button>
+        </aside>
+
+        <!-- RIGHT: product list -->
+        <section class="products-area">
+          <div class="toolbar card">
+            <div><strong id="resultsCount">0</strong> products</div>
+            <div class="toolbar-actions">
+              <select id="viewMode" aria-label="View mode">
+                <option value="grid">Grid</option>
+                <option value="list">List</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="productsList" class="products-grid" aria-live="polite"></div>
+
+          <div id="noResults" class="card muted hidden">No products found. Try different filters.</div>
+        </section>
+      </div>
+    </section>
+
+    <!-- CART -->
+    <section id="page-cart" class="page hidden">
+      <section class="card">
+        <h2>Your Cart</h2>
+        <div id="cartContainer"></div>
+        <div class="cart-summary" id="cartSummary"></div>
+      </section>
+    </section>
+  </main>
+
+  <!-- product quickview modal container -->
+  <div id="modalRoot" aria-hidden="true"></div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>© GlowCart — Our store • Your GlowUp</div>
+      <div class="muted">Shop • Glow • Repeat</div>
+    </div>
+  </footer>
+
+  <!-- main script (deferred) -->
+  <script src="script.js" defer></script>
+</body>
+</html>
